@@ -5,11 +5,10 @@
         "age": 25,
         "id": 1
     },
-
     "customer2": {
         "firstname": "Pedro",
-        "lastname": "Wea",
-        "age": 235,
+        "lastname": "Pedro",
+        "age": 1111,
         "id": 2
     }
 }

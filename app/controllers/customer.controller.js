@@ -39,11 +39,12 @@ exports.update = function(req, res) {
   if(err) throw err;
 	var id = parseInt(req.params.id);
 	var updatedCustomer = req.body; 
-	if(customers["customer" + id] != null){
+	var data = JSON.parse(customers)
+	if(data["customer" + id] != null){
 		// update data
-		customers["customer" + id] = updatedCustomer;
-		console.log("--->Update Successfully, customers: \n" + JSON.stringify(customers, null, 4))
-    fs.writeFile ("myjsonfile.json", JSON.stringify(updatedCustomer, null, 4), function(err) {
+		data["customer" + id] = updatedCustomer;
+		console.log("--->Update Successfully, customers: \n" + JSON.stringify(data, null, 4))
+    fs.writeFile ("myjsonfile.json", JSON.stringify(data, null, 4), function(err) {
       if (err) throw err;
       res.end("Update Successfully! \n" + JSON.stringify(updatedCustomer, null, 4));
       console.log('complete update user');
@@ -55,14 +56,17 @@ exports.update = function(req, res) {
 
 //delete user
 exports.delete = function(req, res) {
-  fs.readFile('myjsonfile.json',function(err,customers){
-    if(err) throw err;
-	var deleteCustomer = customers["customer" + req.params.id];
-    delete customers["customer" + req.params.id];
-    console.log("--->After deletion, customer list:\n" + JSON.stringify(customers, null, 4) );
-    res.end( "Deleted customer: \n" + JSON.stringify(deleteCustomer, null, 4));
-  });
-  fs.writeFile('myjsonfile.json',JSON.stringify(customers),function(err){
-    if(err) throw err;
-  })
+	fs.readFile('myjsonfile.json',function(err,customers) {
+	if(err) throw err;
+	var dataParse = JSON.parse(customers)
+	var deleteCustomer = dataParse["customer" + req.params.id];
+	delete dataParse["customer" + req.params.id];
+	console.log("--->After deletion, customer list:\n" + JSON.stringify(dataParse, null, 4) );
+	res.end( "Deleted customer: \n" + JSON.stringify(deleteCustomer, null, 4));
+	})
+	fs.writeFile ("myjsonfile.json", JSON.stringify(dataParse), function(err) {
+	if (err) throw err;
+	console.log('complete delete user');
+  }
+);
 }
