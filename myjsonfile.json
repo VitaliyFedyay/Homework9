@@ -1,1 +1,15 @@
-{}
+{
+    "customer1": {
+        "firstname": "Jack",
+        "lastname": "Davis",
+        "age": 25,
+        "id": 1
+    },
+
+    "customer2": {
+        "firstname": "Pedro",
+        "lastname": "Wea",
+        "age": 235,
+        "id": 2
+    }
+}

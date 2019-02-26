@@ -1,13 +1,11 @@
 var fs = require('fs');
 var customers = {}
+
 //create new user
 exports.create = function(req, res) {
-	
 	var newCustomer = req.body;
 	customers["customer" + newCustomer.id] = newCustomer;
-	
 	console.log("--->After Post, customers:\n" + JSON.stringify(customers, null, 4));
-
 	fs.writeFile ("myjsonfile.json", JSON.stringify(customers, null, 4), function(err) {
 		if (err) throw err;
 		res.end(JSON.stringify(newCustomer, null, 4));
@@ -15,23 +13,27 @@ exports.create = function(req, res) {
 		}
 	)
 };
+
 //find all user
 exports.findAll = function(req, res) {
-	fs.readFile('myjsonfile.json',function(err,customers){
+	fs.readFile('myjsonfile.json',	function(err,customers){
 		if(err) throw err;
 		res.end(customers);  
 	})
 };
 
+//find one user
 exports.findOne = function(req, res) {
-  fs.readFile('myjsonfile.json',function(err,customers){
+  fs.readFile('myjsonfile.json',	function(err,customers){
 		if(err) throw err;
-    var customer = customers["customer" + req.params.id];
+		var data = JSON.parse(customers)
+		var customer = data["customer" + req.params.id];
 		console.log("--->Find customer: \n" + JSON.stringify(customer, null, 4));
-    res.end( "Find a Customer:\n" + JSON.stringify(customer, null, 4));
+		res.end(JSON.stringify(customer, null, 4));
   })
 };
 
+//update user
 exports.update = function(req, res) {
 	fs.readFile('myjsonfile.json',function(err,customers){
   if(err) throw err;
@@ -40,9 +42,7 @@ exports.update = function(req, res) {
 	if(customers["customer" + id] != null){
 		// update data
 		customers["customer" + id] = updatedCustomer;
-
 		console.log("--->Update Successfully, customers: \n" + JSON.stringify(customers, null, 4))
-
     fs.writeFile ("myjsonfile.json", JSON.stringify(updatedCustomer, null, 4), function(err) {
       if (err) throw err;
       res.end("Update Successfully! \n" + JSON.stringify(updatedCustomer, null, 4));
@@ -53,6 +53,7 @@ exports.update = function(req, res) {
 	}
 })};
 
+//delete user
 exports.delete = function(req, res) {
   fs.readFile('myjsonfile.json',function(err,customers){
     if(err) throw err;
