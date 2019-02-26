@@ -1,14 +1,14 @@
 {
-    "customer1": {
-        "firstname": "Jack",
-        "lastname": "Davis",
-        "age": 25,
+    "user1": {
+        "firstname": "Vitaliy",
+        "lastname": "Fedyay",
+        "age": 23,
         "id": 1
     },
-    "customer2": {
-        "firstname": "Pedro",
-        "lastname": "Pedro",
-        "age": 1111,
+    "user2": {
+        "firstname": "Vitaliy",
+        "lastname": "Fedyay",
+        "age": 23,
         "id": 2
     }
 }

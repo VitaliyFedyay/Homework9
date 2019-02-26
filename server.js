@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json())
 
-require('./app/routes/customer.routes.js')(app);
+require('./app/routes/users.routes.js')(app);
 
 // Create a Server
 var server = app.listen(8080, "localhost", function () {
